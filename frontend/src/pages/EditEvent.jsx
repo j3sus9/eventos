@@ -21,7 +21,7 @@ const EditEvent = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/events/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/events/${id}`);
         setFormData(res.data);
         setLoading(false);
         
@@ -79,7 +79,7 @@ const EditEvent = () => {
     e.preventDefault();
     
     try {
-      await axios.put(`http://localhost:5000/api/events/${id}`, formData);
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/events/${id}`, formData);
       alert('Evento actualizado con éxito');
       navigate('/');
     } catch (error) {

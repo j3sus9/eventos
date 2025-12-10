@@ -26,7 +26,7 @@ const EventDetail = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/events/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/events/${id}`);
         setEvent(res.data);
         setLoading(false);
       } catch (error) {

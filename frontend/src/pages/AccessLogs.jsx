@@ -8,7 +8,7 @@ const AccessLogs = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/logs');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/logs`);
         setLogs(res.data);
         setLoading(false);
       } catch (error) {

@@ -43,7 +43,7 @@ const Home = () => {
 
   const fetchEvents = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/events');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/events`);
       setEvents(res.data);
       setFilteredEvents(res.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)));
     } catch (error) {
@@ -89,7 +89,7 @@ const Home = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('¿Estás seguro de eliminar este evento?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/events/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/events/${id}`);
       fetchEvents(); // Refresh list
     } catch (error) {
       console.error('Error deleting event:', error);
