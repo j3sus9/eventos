@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const mongoURI = 'mongodb+srv://jesusrepisouma_db_user:jRexvSVo2afPFURl@examenfrontend.6tl8muv.mongodb.net/';
+const mongoURI = process.env.MONGO_URI || 'mongodb+srv://jesusrepisouma_db_user:jRexvSVo2afPFURl@examenfrontend.6tl8muv.mongodb.net/eventual?retryWrites=true&w=majority';
 
 mongoose.connect(mongoURI)
   .then(() => console.log('MongoDB connected'))
