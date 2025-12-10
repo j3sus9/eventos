@@ -25,12 +25,16 @@ router.get('/:id', async (req, res) => {
 
 // POST create event
 router.post('/', async (req, res) => {
+  // Ensure lat/lon are numbers to prevent validation errors
+  const lat = req.body.lat ? parseFloat(req.body.lat) : 0;
+  const lon = req.body.lon ? parseFloat(req.body.lon) : 0;
+
   const event = new Event({
     nombre: req.body.nombre,
     timestamp: req.body.timestamp,
     lugar: req.body.lugar,
-    lat: req.body.lat,
-    lon: req.body.lon,
+    lat: isNaN(lat) ? 0 : lat,
+    lon: isNaN(lon) ? 0 : lon,
     organizador: req.body.organizador,
     imagen: req.body.imagen
   });
@@ -39,6 +43,7 @@ router.post('/', async (req, res) => {
     const newEvent = await event.save();
     res.status(201).json(newEvent);
   } catch (err) {
+    console.error('Error saving event:', err);
     res.status(400).json({ message: err.message });
   }
 });
