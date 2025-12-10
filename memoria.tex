@@ -1,0 +1,174 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{xcolor}
+
+% Configuración de márgenes
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+% Configuración de colores para código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+
+% Portada
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    {\Large \textbf{Universidad de Málaga}}\\[0.5cm]
+    {\large Departamento de Lenguajes y Ciencias de la Computación}\\[2cm]
+    
+    {\Large Asignatura: Ingeniería Web 2023/24}\\[2cm]
+    
+    {\Huge \textbf{Memoria Técnica: Proyecto Eventual}}\\[3cm]
+    
+    {\Large \textbf{Alumno:} [TU NOMBRE AQUÍ]}\\[2cm]
+    
+    \vfill
+    
+    {\large \today}
+    
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Despliegue de la Aplicación}
+
+La aplicación "Eventual" ha sido desplegada exitosamente en un proveedor de servicios en la nube pública, permitiendo el acceso remoto a todas sus funcionalidades.
+
+\vspace{0.5cm}
+\noindent
+\textbf{URL del proyecto:} \url{[PONER_AQUI_LA_URL_FINAL_DE_VERCEL_O_RENDER]}
+
+\section{Tecnologías Utilizadas}
+
+Para el desarrollo de este proyecto se ha utilizado el stack MERN (MongoDB, Express, React, Node.js), complementado con diversas librerías y servicios externos:
+
+\begin{itemize}
+    \item \textbf{Frontend:}
+    \begin{itemize}
+        \item \textbf{React (Vite):} Biblioteca principal para la interfaz de usuario, utilizando Vite como herramienta de construcción rápida.
+        \item \textbf{Axios:} Cliente HTTP para la comunicación con el backend.
+        \item \textbf{React Router:} Gestión del enrutamiento en el lado del cliente (SPA).
+        \item \textbf{React-Leaflet:} Integración de mapas interactivos.
+        \item \textbf{@react-oauth/google:} Implementación del flujo de autenticación con Google.
+    \end{itemize}
+    
+    \item \textbf{Backend:}
+    \begin{itemize}
+        \item \textbf{Node.js:} Entorno de ejecución de JavaScript en el servidor.
+        \item \textbf{Express:} Framework web para la creación de la API REST.
+    \end{itemize}
+    
+    \item \textbf{Base de Datos:}
+    \begin{itemize}
+        \item \textbf{MongoDB (Atlas):} Base de datos NoSQL en la nube.
+        \item \textbf{Mongoose:} ODM para el modelado de datos.
+    \end{itemize}
+    
+    \item \textbf{Servicios Externos:}
+    \begin{itemize}
+        \item \textbf{Cloudinary:} Servicio para el almacenamiento y gestión de imágenes en la nube.
+        \item \textbf{Google OAuth 2.0:} Sistema de autenticación segura.
+        \item \textbf{Nominatim / OpenStreetMap:} API utilizada para servicios de Geocoding (directo e inverso).
+    \end{itemize}
+    
+    \item \textbf{Despliegue:}
+    \begin{itemize}
+        \item \textbf{Frontend:} Vercel.
+        \item \textbf{Backend:} Render / Railway.
+    \end{itemize}
+\end{itemize}
+
+\section{Instrucciones de Instalación y Despliegue}
+
+\subsection{Ejecución en Local}
+Para ejecutar el proyecto en un entorno de desarrollo local, dado que se entrega en formato comprimido, siga los siguientes pasos:
+
+\begin{lstlisting}[language=bash, caption=Comandos de instalación local]
+# 1. Descomprimir el archivo ZIP y acceder a la carpeta
+cd examenFrontend
+
+# 2. Configuración del Backend
+cd backend
+npm install
+# Crear archivo .env con las variables necesarias (MONGO_URI, etc.)
+node server.js
+
+# 3. Configuración del Frontend (en una nueva terminal)
+cd ../frontend
+npm install
+npm run dev
+\end{lstlisting}
+
+\subsection{Despliegue en la Nube}
+El despliegue se ha realizado subiendo el código fuente a los servicios de hosting:
+\begin{itemize}
+    \item \textbf{Backend:} Se ha desplegado en Render/Railway. En el panel de control del servicio se han configurado las variables de entorno necesarias (como la URI de MongoDB) y se ha especificado el comando de inicio.
+    \item \textbf{Frontend:} Se ha desplegado en Vercel. Durante el proceso de build, se han configurado las variables de entorno para que el cliente apunte a la URL del backend desplegado en producción.
+\end{itemize}
+
+\section{Credenciales de Acceso a la Base de Datos}
+Para facilitar la verificación del contenido y la estructura de datos generada durante el uso de la aplicación, se proporciona la siguiente URI de conexión directa a la base de datos MongoDB Atlas:
+
+\begin{lstlisting}[breaklines=true]
+mongodb+srv://jesusrepisouma_db_user:jRexvSVo2afPFURl@examenfrontend.6tl8muv.mongodb.net/
+\end{lstlisting}
+
+\section{Funcionalidad Implementada y Limitaciones}
+
+A continuación se describen los detalles técnicos de las funcionalidades implementadas:
+
+\subsection{Gestión de Eventos}
+Se ha implementado un CRUD completo para la entidad Evento. Cada evento almacena información como nombre, timestamp, lugar, organizador e imagen. Destaca la funcionalidad de \textbf{geocoding automático}: al introducir una dirección en el campo "lugar", el sistema consulta la API de Nominatim para obtener y guardar automáticamente las coordenadas (latitud y longitud).
+
+\subsection{Búsqueda y Proximidad}
+En la página principal, se permite buscar eventos por dirección. El sistema realiza un filtrado basado en la proximidad geográfica, mostrando únicamente aquellos eventos cuya \textbf{distancia euclidiana es menor a 0.2 unidades} respecto a las coordenadas de la dirección buscada.
+
+\subsection{Mapa Interactivo}
+Se ha integrado un mapa utilizando \texttt{react-leaflet}. Este mapa se centra automáticamente en la ubicación buscada por el usuario y muestra marcadores (Markers) en las posiciones de los eventos filtrados, permitiendo una visualización espacial clara de los resultados.
+
+\subsection{Seguridad y Logs}
+La autenticación se gestiona mediante \textbf{Google OAuth 2.0}. 
+\begin{itemize}
+    \item \textbf{Registro de Logs:} Tras cada inicio de sesión exitoso, se realiza una llamada automática al backend para registrar un log de acceso en la base de datos. Este registro incluye el timestamp, el email del usuario y el token de sesión.
+    \item \textbf{Control de Acceso:} Las operaciones de edición y borrado de eventos están protegidas, permitiéndose únicamente si el email del usuario autenticado coincide con el del organizador del evento.
+\end{itemize}
+
+\subsection{Imágenes}
+La aplicación permite la subida de imágenes locales. Estas son procesadas y enviadas al servicio \textbf{Cloudinary}, que devuelve una URL pública. Esta URL es la que se almacena finalmente en la base de datos de MongoDB asociada al evento.
+
+\subsection{Limitaciones}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\end{document}
