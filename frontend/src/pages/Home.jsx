@@ -98,23 +98,24 @@ const Home = () => {
   };
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <div style={{ marginBottom: '2rem' }}>
-        <form onSubmit={handleSearch} style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '1rem' }}>
+    <div>
+      <div className="mb-8">
+        <form onSubmit={handleSearch} className="flex gap-2 justify-center mb-4">
           <input
             type="text"
             value={searchAddress}
             onChange={(e) => setSearchAddress(e.target.value)}
             placeholder="Buscar dirección..."
-            style={{ padding: '0.5rem', width: '300px' }}
+            className="form-input"
+            style={{ maxWidth: '400px' }}
           />
-          <button type="submit" style={{ padding: '0.5rem 1rem' }}>Buscar</button>
+          <button type="submit" className="btn btn-primary">Buscar</button>
         </form>
       </div>
 
-      <div style={{ display: 'flex', gap: '2rem', flexDirection: 'column' }}>
+      <div className="flex" style={{ flexDirection: 'column', gap: '2rem' }}>
         {/* Map Section */}
-        <div style={{ height: '400px', width: '100%', border: '1px solid #ccc' }}>
+        <div className="card" style={{ height: '400px', width: '100%', border: 'none' }}>
           <MapContainer center={[searchCoords.lat, searchCoords.lon]} zoom={13} style={{ height: '100%', width: '100%' }}>
             <ChangeView center={[searchCoords.lat, searchCoords.lon]} />
             <TileLayer
@@ -134,32 +135,36 @@ const Home = () => {
 
         {/* List Section */}
         <div>
-          <h2>Eventos Encontrados ({filteredEvents.length})</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}>
+          <h2 className="mb-4">Eventos Encontrados ({filteredEvents.length})</h2>
+          <div className="grid-events">
             {filteredEvents.map(event => (
-              <div key={event._id} style={{ border: '1px solid #ddd', padding: '1rem', borderRadius: '8px', textAlign: 'left' }}>
+              <div key={event._id} className="card">
                 {event.imagen && (
-                  <img src={event.imagen} alt={event.nombre} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '4px' }} />
+                  <img src={event.imagen} alt={event.nombre} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
                 )}
-                <h3>{event.nombre}</h3>
-                <p><strong>Lugar:</strong> {event.lugar}</p>
-                <p><strong>Fecha:</strong> {new Date(event.timestamp).toLocaleString()}</p>
-                <p><strong>Organizador:</strong> {event.organizador}</p>
-                
-                <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
-                  <Link to={`/detalle/${event._id}`} style={{ textDecoration: 'none', color: 'blue' }}>Ver Detalle</Link>
+                <div style={{ padding: '1.5rem' }}>
+                  <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>{event.nombre}</h3>
+                  <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>
+                    <strong>Lugar:</strong> {event.lugar}<br/>
+                    <strong>Fecha:</strong> {new Date(event.timestamp).toLocaleString()}
+                  </p>
                   
-                  {user && user.email === event.organizador && (
-                    <>
-                      <Link to={`/editar/${event._id}`} style={{ textDecoration: 'none', color: 'green' }}>Editar</Link>
-                      <button 
-                        onClick={() => handleDelete(event._id)}
-                        style={{ background: 'none', border: 'none', color: 'red', cursor: 'pointer', padding: 0, textDecoration: 'underline' }}
-                      >
-                        Borrar
-                      </button>
-                    </>
-                  )}
+                  <div className="flex justify-between items-center">
+                    <Link to={`/detalle/${event._id}`} className="btn btn-outline" style={{ fontSize: '0.875rem' }}>Ver Detalle</Link>
+                    
+                    {user && user.email === event.organizador && (
+                      <div className="flex gap-2">
+                        <Link to={`/editar/${event._id}`} className="btn btn-primary" style={{ fontSize: '0.875rem', padding: '0.25rem 0.75rem' }}>Editar</Link>
+                        <button 
+                          onClick={() => handleDelete(event._id)}
+                          className="btn btn-danger"
+                          style={{ fontSize: '0.875rem', padding: '0.25rem 0.75rem' }}
+                        >
+                          Borrar
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}

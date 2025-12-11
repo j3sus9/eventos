@@ -41,10 +41,10 @@ const EventDetail = () => {
   if (!event) return <div>Evento no encontrado</div>;
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '1rem', textAlign: 'left' }}>
-      <Link to="/" style={{ display: 'inline-block', marginBottom: '1rem' }}>&larr; Volver al inicio</Link>
+    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <Link to="/" className="btn btn-outline mb-4">&larr; Volver al inicio</Link>
       
-      <div style={{ border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
+      <div className="card">
         {event.imagen && (
           <img 
             src={event.imagen} 
@@ -54,18 +54,20 @@ const EventDetail = () => {
         )}
         
         <div style={{ padding: '2rem' }}>
-          <h1 style={{ marginTop: 0 }}>{event.nombre}</h1>
+          <h1 className="mb-8">{event.nombre}</h1>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '2rem' }}>
+          <div className="grid-events" style={{ gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
             <div>
-              <h3>Detalles</h3>
-              <p><strong>Lugar:</strong> {event.lugar}</p>
-              <p><strong>Fecha:</strong> {new Date(event.timestamp).toLocaleString()}</p>
-              <p><strong>Organizador:</strong> {event.organizador}</p>
-              <p><strong>Coordenadas:</strong> {event.lat}, {event.lon}</p>
+              <h3 className="mb-4">Detalles</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <p><strong>Lugar:</strong> {event.lugar}</p>
+                <p><strong>Fecha:</strong> {new Date(event.timestamp).toLocaleString()}</p>
+                <p><strong>Organizador:</strong> {event.organizador}</p>
+                <p><strong>Coordenadas:</strong> {event.lat}, {event.lon}</p>
+              </div>
             </div>
             
-            <div style={{ height: '300px', border: '1px solid #ccc' }}>
+            <div style={{ height: '300px', borderRadius: 'var(--radius)', overflow: 'hidden', border: '1px solid var(--border)' }}>
               <MapContainer center={[event.lat, event.lon]} zoom={15} style={{ height: '100%', width: '100%' }}>
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

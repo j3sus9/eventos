@@ -22,32 +22,32 @@ const AccessLogs = () => {
   if (loading) return <div>Cargando logs...</div>;
 
   return (
-    <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '1rem' }}>
-      <h2>Historial de Accesos</h2>
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '1rem' }}>
+    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <h2 className="mb-8">Historial de Accesos</h2>
+      <div className="table-container">
+        <table className="table">
           <thead>
-            <tr style={{ backgroundColor: '#f8f9fa', borderBottom: '2px solid #dee2e6' }}>
-              <th style={{ padding: '12px', textAlign: 'left' }}>Fecha/Hora</th>
-              <th style={{ padding: '12px', textAlign: 'left' }}>Usuario</th>
-              <th style={{ padding: '12px', textAlign: 'left' }}>Caducidad Token</th>
-              <th style={{ padding: '12px', textAlign: 'left' }}>Token (Fragmento)</th>
+            <tr>
+              <th>Fecha/Hora</th>
+              <th>Usuario</th>
+              <th>Caducidad Token</th>
+              <th>Token (Fragmento)</th>
             </tr>
           </thead>
           <tbody>
             {logs.map((log) => (
-              <tr key={log._id} style={{ borderBottom: '1px solid #dee2e6' }}>
-                <td style={{ padding: '12px' }}>{new Date(log.timestamp).toLocaleString()}</td>
-                <td style={{ padding: '12px' }}>{log.usuario}</td>
-                <td style={{ padding: '12px' }}>{new Date(log.caducidad).toLocaleString()}</td>
-                <td style={{ padding: '12px', fontFamily: 'monospace' }}>
+              <tr key={log._id}>
+                <td>{new Date(log.timestamp).toLocaleString()}</td>
+                <td>{log.usuario}</td>
+                <td>{new Date(log.caducidad).toLocaleString()}</td>
+                <td style={{ fontFamily: 'monospace', color: 'var(--primary)' }}>
                   {log.token ? `${log.token.substring(0, 20)}...` : 'N/A'}
                 </td>
               </tr>
             ))}
             {logs.length === 0 && (
               <tr>
-                <td colSpan="4" style={{ padding: '2rem', textAlign: 'center' }}>No hay registros de acceso</td>
+                <td colSpan="4" className="text-center" style={{ padding: '2rem' }}>No hay registros de acceso</td>
               </tr>
             )}
           </tbody>

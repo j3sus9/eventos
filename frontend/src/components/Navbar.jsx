@@ -56,31 +56,33 @@ const Navbar = () => {
   };
 
   return (
-    <nav style={{ padding: '1rem', borderBottom: '1px solid #ccc', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <div>
-        <Link to="/" style={{ marginRight: '1rem' }}>Inicio</Link>
-        {user && (
-          <>
-            <Link to="/crear" style={{ marginRight: '1rem' }}>Crear Evento</Link>
-            <Link to="/logs">Logs</Link>
-          </>
-        )}
-      </div>
-      
-      <div>
-        {user ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <span>Hola, {user.name}</span>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        ) : (
-          <GoogleLogin
-            onSuccess={handleLoginSuccess}
-            onError={() => {
-              console.log('Login Failed');
-            }}
-          />
-        )}
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className="nav-links">
+          <Link to="/" className="nav-link">Inicio</Link>
+          {user && (
+            <>
+              <Link to="/crear" className="nav-link">Crear Evento</Link>
+              <Link to="/logs" className="nav-link">Logs</Link>
+            </>
+          )}
+        </div>
+        
+        <div>
+          {user ? (
+            <div className="flex items-center gap-4">
+              <span style={{ fontWeight: 500 }}>Hola, {user.name}</span>
+              <button onClick={handleLogout} className="btn btn-outline">Logout</button>
+            </div>
+          ) : (
+            <GoogleLogin
+              onSuccess={handleLoginSuccess}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
+          )}
+        </div>
       </div>
     </nav>
   );
